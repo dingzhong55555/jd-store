@@ -3,6 +3,8 @@
 
     <h2> 订单明细 (<%= render_order_paid_state(@order) %>) </h2>
 
+    <%= render "admin/orders/order_state", order: @order %>
+
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -65,5 +67,5 @@
                   </tbody>
                 </table>
 
-              </div>
-            </div>
+  </div>
+</div>
