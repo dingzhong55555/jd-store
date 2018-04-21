@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
 
     helper_method :current_cart
 
+    def require_is_admin!
+      if !current_user.is_admin?
+        redirect_to "/"
+        flash[:notice] = "You have no permission!"
+      end
+    end
+
     def current_cart
       @current_cart ||= find_cart
     end
