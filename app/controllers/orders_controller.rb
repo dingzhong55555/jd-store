@@ -1,4 +1,10 @@
 class OrdersController < ApplicationController
+
+  def show
+    @order = Order.find_by_token(params[:id])
+    @product_lists = @order.product_lists
+  end
+
   def create
     @order = Order.new(order_params)
     @order.user = current_user
@@ -20,14 +26,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-    @order = Order.find_by_token(params[:id])
-    @product_lists = @order.product_lists
-  end
-
   def pay_with_alipay
     @order = Order.find_by_token(params[:id])
-    @order.pay!
+    @order.make_payment!
     @order.set_payment_method_with("alipay")
     if @order.save
       redirect_to order_path(@order.token)
@@ -39,7 +40,7 @@ class OrdersController < ApplicationController
 
   def pay_with_wechat
     @order = Order.find_by_token(params[:id])
-    @order.pay!
+    @order.make_payment!
     @order.set_payment_method_with("wechat")
     if @order.save
       redirect_to order_path(@order.token)

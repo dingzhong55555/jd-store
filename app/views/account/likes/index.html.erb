@@ -1,7 +1,5 @@
-<h2> Product List </h2>
-<div class="pull-right" style="padding-bottom: 20px;">
-  <%= link_to("新增产品", new_admin_product_path, class: "btn btn-primary btn-sm") %>
-</div>
+<h1>LIKES_PRODUCTS</h1>
+
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -9,11 +7,10 @@
       <th width="220">Product Pic</th>
       <th>Name</th>
       <th>Price</th>
-      <th width="100"> Options</th>
     </tr>
   </thead>
   <tbody>
-    <% @products.each do |product| %>
+    <% current_user.liked_products.each do |product| %>
       <tr>
         <td>
           <%= product.id %>
@@ -32,10 +29,6 @@
         </td>
         <td>
           <%= product.price %>
-        </td>
-        <td>
-          <%= link_to("Edit", edit_admin_product_path(product)) %> |
-          <%= link_to("Delete", admin_product_path(product), method: :delete, data: {confirm: "Are you sure?"}) %>
         </td>
       </tr>
     <% end %>
