@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
          product_list.save
       end
       current_cart.clear!
-      OrderMailer.delivery_order_placed(@order).deliver!
+      # OrderMailer.delivery_order_placed(@order).deliver!
       redirect_to order_path(@order.token)
     else
       render "carts/checkout"
